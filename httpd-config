@@ -1,0 +1,126 @@
+<Directory "/var/www/html/beta_lottoweaver">
+        #Options -Indexes FollowSymLinks
+        #Options -Indexes FollowSymLinks +ExecCGI
+        #AddHandler php5-fastcgi .php
+        #Action php5-fastcgi /cgi-bin/php.fastcgi
+        AllowOverride All
+        Order Allow,Deny
+        Allow from all
+        DirectoryIndex index.php
+        #php_flag register_globals off
+        RewriteEngine On
+        RewriteCond $1 !^(index\.php|robots\.txt|favicon\.ico)
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteCond %{REQUEST_FILENAME} !-d
+        RewriteRule ^(.*)$ index.php/$1 [L,QSA]
+
+        <FilesMatch "(?i)\.(php|php3|phtml|phps|gz|tgz|Z|sh|html|xml|txt|appcache|dist)$">
+            Order Deny,Allow
+            Deny from All
+        </FilesMatch>
+
+        <FilesMatch "(?i)^.*\.(ico|flv|gif|swf|xml|txt|jpg|jpeg|png|gif|js|css)$">
+             ExpiresActive On
+             ExpiresDefault "access plus 30 days"
+        </FilesMatch>
+
+        ErrorDocument 403 /var/www/error_htmls/http-errors.php
+
+        <IfModule mod_env.c>
+           SetEnv HTTPS on
+        </IfModule>
+
+        <IfModule mod_php5.c>
+                php_value session.cookie_secure On
+        </IfModule>
+
+        <IfModule mod_headers.c>
+           Header edit Set-Cookie ^(.*)$ $1;HttpOnly;Secure
+        </IfModule>
+</Directory>
+
+
+#<Location "/">
+#        Order Allow,Deny
+#        Allow from all
+#</Location>
+
+<Location "/index.php">
+        Order Allow,Deny
+        Allow from all
+</Location>
+
+<Location "/communication.php">
+        Order Allow,Deny
+        Allow from all
+</Location>
+
+<Location "/beta_lottoweaver/index.php">
+        Order Allow,Deny
+        Allow from all
+</Location>
+
+<Location "/test.php">
+        Order Allow,Deny
+        Allow from all
+</Location>
+
+
+<Location "/gameEngine/index.php">
+        Order Allow,Deny
+        Allow from all
+</Location>
+
+<Location "/InstantWinGames/index.php">
+        Order Allow,Deny
+        Allow from all
+</Location>
+
+<Location "/SpinNWin/index.php">
+        Order Allow,Deny
+        Allow from all
+</Location>
+
+
+<Location "/t.php">
+        Order Allow,Deny
+        Allow from all
+</Location>
+
+
+<Location "/slot/index.php">
+        Order Allow,Deny
+        Allow from all
+</Location>
+
+<Location "/PM_Beta/index.php">
+        Order Allow,Deny
+        Allow from all
+</Location>
+
+
+<Location "/ussd/">
+        Order Allow,Deny
+        Allow from all
+</Location>
+
+
+<Location "/crossdomain.xml">
+        Order Allow,Deny
+        Allow from all
+</Location>
+
+<Location "/sitemap.xml">
+        Order Allow,Deny
+        Allow from all
+</Location>
+
+<Location "/robots.txt">
+        Order Allow,Deny
+        Allow from all
+</Location>
+
+<Location "/administrator/index.php">
+        Order Allow,Deny
+        Allow from all
+</Location>
