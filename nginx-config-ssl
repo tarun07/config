@@ -1,0 +1,176 @@
+server {
+    listen       80;
+    server_name  praptidhi.in;
+    return       301 https://www.praptidhi.in$request_uri;
+}
+
+
+
+server {
+    listen 80;
+    server_name www.praptidhi.in;
+    return       301 https://www.praptidhi.in$request_uri;
+
+
+
+    index index.html;
+    root /usr/share/nginx/html/web;
+
+    location ~* \.(?:css|js)$ {
+
+        access_log        off;
+        log_not_found     off;
+
+        add_header        Cache-Control "no-cache, public, must-revalidate, proxy-revalidate";
+    }
+
+    location ~* \.(?:jpg|jpeg|gif|png|ico|xml|webp)$ {
+
+        access_log        off;
+        log_not_found     off;
+
+        add_header        Cache-Control "public";
+    }
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
+     }
+
+    location / {
+
+        try_files $uri$args $uri$args/ /index.html;
+
+    }
+
+}
+
+
+server {
+
+    listen 443;
+
+    ssl                  on;
+    ssl_certificate      /etc/ssl/certificate.crt;
+    ssl_certificate_key  /etc/ssl/private.key;
+
+    server_name www.praptidhi.in;
+
+    index index.html;
+    root /usr/share/nginx/html/web;
+
+    location ~* \.(?:css|js)$ {
+
+        access_log        off;
+        log_not_found     off;
+
+        add_header        Cache-Control "no-cache, public, must-revalidate, proxy-revalidate";
+    }
+
+    location ~* \.(?:jpg|jpeg|gif|png|ico|xml|webp)$ {
+
+        access_log        off;
+        log_not_found     off;
+
+        add_header        Cache-Control "public";
+    }
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
+     }
+
+    location / {
+
+        try_files $uri$args $uri$args/ /index.html;
+
+    }
+
+}
+
+
+server {
+    listen       80;
+    server_name  covi19stats.in;
+    return       301 http://www.covi19stats.in$request_uri;
+}
+
+server {
+    listen 80;
+    server_name www.covi19stats.in;
+
+    index index.html index.php;
+    root /usr/share/nginx/html/covid;
+
+    location ~* \.(?:css|js)$ {
+
+        access_log        off;
+        log_not_found     off;
+
+        add_header        Cache-Control "no-cache, public, must-revalidate, proxy-revalidate";
+    }
+
+    location ~* \.(?:jpg|jpeg|gif|png|ico|xml|webp|otf|eot|svg|ttf|woff|woff2)$ {
+
+        access_log        off;
+        log_not_found     off;
+
+        add_header        Cache-Control "public";
+    }
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
+     }
+
+    location / {
+
+        try_files $uri$args $uri$args/ @extensionless-php;
+
+    }
+
+    location @extensionless-php {
+        rewrite ^(.*)$ $1.php last;
+    }
+
+}
+
+server {
+    listen 80;
+    server_name covid.praptidhi.in;
+
+    index index.html index.php;
+    root /usr/share/nginx/html/covid/demo;
+
+    location ~* \.(?:css|js)$ {
+
+        access_log        off;
+        log_not_found     off;
+
+        add_header        Cache-Control "no-cache, public, must-revalidate, proxy-revalidate";
+    }
+
+    location ~* \.(?:jpg|jpeg|gif|png|ico|xml|webp|otf|eot|svg|ttf|woff|woff2)$ {
+
+        access_log        off;
+        log_not_found     off;
+
+        add_header        Cache-Control "public";
+    }
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
+     }
+
+    location / {
+
+        try_files $uri$args $uri$args/ @extensionless-php;
+
+    }
+
+    location @extensionless-php {
+        rewrite ^(.*)$ $1.php last;
+    }
+
+}
